@@ -1,15 +1,11 @@
 {
   "info": {
+    "_postman_id": "12345678-1234-1234-1234-123456789012",
     "name": "Postman Demo API Collection",
     "description": "Classroom collection for REST API exercises",
-    "version": "1.0.0"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "12345678"
   },
-  "variable": [
-    {
-      "key": "baseUrl",
-      "value": "http://localhost:3000/api/v1"
-    }
-  ],
   "item": [
     {
       "name": "List All Users",
@@ -17,9 +13,17 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/users",
-          "host": ["{{baseUrl}}"],
-          "path": ["users"]
+          "raw": "http://localhost:3000/api/v1/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "users"
+          ]
         },
         "description": "Get all users with optional query parameters for filtering, sorting, and pagination"
       },
@@ -31,9 +35,17 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/users?limit=2&offset=0&role=student&sort=name:asc",
-          "host": ["{{baseUrl}}"],
-          "path": ["users"],
+          "raw": "http://localhost:3000/api/v1/users?limit=2&offset=0&role=student&sort=name:asc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "users"
+          ],
           "query": [
             {
               "key": "limit",
@@ -67,9 +79,18 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/users/11111111-1111-4111-8111-111111111111",
-          "host": ["{{baseUrl}}"],
-          "path": ["users", "11111111-1111-4111-8111-111111111111"]
+          "raw": "http://localhost:3000/api/v1/users/11111111-1111-4111-8111-111111111111",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "users",
+            "11111111-1111-4111-8111-111111111111"
+          ]
         },
         "description": "Get a specific user by their UUID"
       },
@@ -82,17 +103,31 @@
         "header": [
           {
             "key": "Content-Type",
-            "value": "application/json"
+            "value": "application/json",
+            "type": "text"
           }
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"name\": \"Alex Johnson\",\n  \"email\": \"alex@example.com\",\n  \"role\": \"student\"\n}"
+          "raw": "{\n  \"name\": \"Alex Johnson\",\n  \"email\": \"alex@example.com\",\n  \"role\": \"student\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
         },
         "url": {
-          "raw": "{{baseUrl}}/users",
-          "host": ["{{baseUrl}}"],
-          "path": ["users"]
+          "raw": "http://localhost:3000/api/v1/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "users"
+          ]
         },
         "description": "Create a new user with name, email, and role"
       },
@@ -105,17 +140,32 @@
         "header": [
           {
             "key": "Content-Type",
-            "value": "application/json"
+            "value": "application/json",
+            "type": "text"
           }
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"name\": \"Asha Patel\",\n  \"role\": \"instructor\"\n}"
+          "raw": "{\n  \"name\": \"Asha Patel\",\n  \"role\": \"instructor\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
         },
         "url": {
-          "raw": "{{baseUrl}}/users/11111111-1111-4111-8111-111111111111",
-          "host": ["{{baseUrl}}"],
-          "path": ["users", "11111111-1111-4111-8111-111111111111"]
+          "raw": "http://localhost:3000/api/v1/users/11111111-1111-4111-8111-111111111111",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "users",
+            "11111111-1111-4111-8111-111111111111"
+          ]
         },
         "description": "Update an existing user (partial updates allowed)"
       },
@@ -127,13 +177,49 @@
         "method": "DELETE",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/users/11111111-1111-4111-8111-111111111111",
-          "host": ["{{baseUrl}}"],
-          "path": ["users", "11111111-1111-4111-8111-111111111111"]
+          "raw": "http://localhost:3000/api/v1/users/11111111-1111-4111-8111-111111111111",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "v1",
+            "users",
+            "11111111-1111-4111-8111-111111111111"
+          ]
         },
         "description": "Delete a user by their UUID"
       },
       "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api/v1",
+      "type": "string"
     }
   ]
 }
