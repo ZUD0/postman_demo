@@ -33,7 +33,7 @@ let users = [
 /**
  * List users with query parameter support
  * @param {Object} options - Query options {limit, offset, role, sort}
- * @returns {Array} Array of users matching criteria
+ * @returns {Object} { items: Array, total: Number }
  */
 const list = (options = {}) => {
   const { limit = 10, offset = 0, role, sort } = options;
@@ -57,8 +57,19 @@ const list = (options = {}) => {
     }
   }
 
-  // Apply pagination
-  return result.slice(offset, offset + limit);
+  // Capture total (before pagination)
+  const total = result.length;
+
+  // Apply pagination (ensure offset/limit are numbers)
+  const safeOffset = Number.isInteger(offset) && offset > 0 ? offset : 0;
+  const safeLimit = Number.isInteger(limit) && limit > 0 ? limit : 10;
+
+  const items = result.slice(safeOffset, safeOffset + safeLimit);
+
+  return {
+    items,
+    total
+  };
 };
 
 /**

@@ -12,29 +12,39 @@ const responseHelpers = require('../utils/responseHelpers');
  */
 const listUsers = async (req, res, next) => {
   try {
-    const { limit, offset, role, sort } = req.query;
+    let { limit, offset, role, sort } = req.query;
     
-    // Parse query parameters
+    // Parse and sanitize query parameters
+    limit = limit ? parseInt(limit, 10) : 10;
+    offset = offset ? parseInt(offset, 10) : 0;
+    
+    // Safety defaults & caps
+    if (Number.isNaN(limit) || limit <= 0) limit = 10;
+    if (Number.isNaN(offset) || offset < 0) offset = 0;
+    const MAX_LIMIT = 100;
+    if (limit > MAX_LIMIT) limit = MAX_LIMIT;
+    
     const options = {
-      limit: limit ? parseInt(limit) : 10,
-      offset: offset ? parseInt(offset) : 0,
+      limit,
+      offset,
       role: role || undefined,
       sort: sort || undefined
     };
     
-    const users = usersService.list(options);
+    // Now service returns items + total
+    const { items, total } = usersService.list(options);
     
     // Build metadata for response
     const meta = {
       limit: options.limit,
       offset: options.offset,
-      total: users.length
+      total
     };
     
     if (options.role) meta.role = options.role;
     if (options.sort) meta.sort = options.sort;
     
-    responseHelpers.listResponse(res, users, meta);
+    responseHelpers.listResponse(res, items, meta);
   } catch (error) {
     next(error);
   }
