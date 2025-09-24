@@ -1,0 +1,14 @@
+{
+  "info": {
+    "name": "Postman Demo API Collection",
+    "description": "Classroom collection for REST API exercises",
+    "version": "1.0.0"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api/v1"
+    }
+  ],
+  "item": []
+}
